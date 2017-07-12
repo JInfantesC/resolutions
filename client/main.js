@@ -1,14 +1,17 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
+import { Resolutions } from '/imports/api/resolutions.js';
 
 import './main.html';
 
+Resolutions.insert({title: 'my-todo'});
+Resolutions.insert({title: 'ololol'});
+
+
 Template.body.helpers({
-    resolutions:[
-        {title:"Hello Resolution #1"},
-        {title:"Hello Resolution #2"},
-        {title:"Learning Meteor #3"}
-    ]
+    resolutions:function (){
+        return Resolutions.find();
+    }
 });
 
 
