@@ -6,6 +6,10 @@
     <div class="container">
         <header>
             <h1>Monthly Resolutions</h1>
+            <label class="hide-finished">
+                <input type="checkbox" checked="{{hideFinished}}"/>
+                Hide Finished resolutions
+            </label>
             <form class="new-resolution">
                 <input type="text" name="title" placeholder="A new resolution"/>
                 <input type="submit" value="Submit" />
@@ -23,8 +27,10 @@
 
 <template name="resolution">
     <li class="{{#if checked}}checked{{/if}}">  <!--IF value checked=true do something-->
-        <input type="checkbox" checked="{{checked}}" class="toggle-checked"/>
-        <span class="text">{{title}}</span>
+
+        <label class="text">
+            <input type="checkbox" checked="{{checked}}" class="toggle-checked"/>
+            {{title}}</label>
         <button class="delete">Remove</button>
     </li>
 </template>

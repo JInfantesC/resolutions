@@ -9,8 +9,16 @@ Resolutions.insert({title: 'ololol'});
 */
 
 Template.body.helpers({
+
     resolutions:function (){
-        return Resolutions.find();
+        if (Session.get("hideFinished")){
+            return Resolutions.find({
+                checked:{$ne: true} //MongoDb stuff. if checked is NotEqual to true
+            });
+        }else{
+            return Resolutions.find();
+        }
+
     }
 });
 Template.body.events({
@@ -23,6 +31,10 @@ Template.body.events({
         });
         event.target.title.value="";
         return false;
+    },
+    "change .hide-finished":function(event){
+        console.log(Session.get("hideFinished"));
+        Session.set("hideFinished", event.target.checked)
     }
 });
 Template.resolution.events({
