@@ -19,12 +19,27 @@ Template.body.events({
         var title=event.target.title.value;
         Resolutions.insert({
             title:title,
-            createAt: new Date()
+            createAt: new Date(),
         });
         event.target.title.value="";
         return false;
     }
-})
+});
+Template.resolution.events({
+    "click .toggle-checked":function(){
+        //Update needs (id to update, values in JSON)
+        Resolutions.update(this._id, {
+            //Set values. Another JSON
+            $set:{
+                checked: !this.checked  //You can use this reach any value in the template.
+            }
+        });
+    },
+    //Action, selector
+    "click .delete":function(){
+        Resolutions.remove(this._id);//this means clicked resolution.
+    }
+});
 
 
 
