@@ -6,6 +6,8 @@
     <div class="container">
         <header>
             <h1>Monthly Resolutions</h1>
+            {{> loginButtons}}<br />
+            {{#if currentUser}}
             <label class="hide-finished">
                 <input type="checkbox" checked="{{hideFinished}}"/>
                 Hide Finished resolutions
@@ -14,14 +16,16 @@
                 <input type="text" name="title" placeholder="A new resolution"/>
                 <input type="submit" value="Submit" />
             </form>
+            {{/if}}
         </header>
+        <ul>
+            {{#each resolutions}}
+                {{> resolution}}
+            {{/each}}
+        </ul>
 
     </div>
-    <ul>
-        {{#each resolutions}}
-            {{> resolution}}
-        {{/each}}
-    </ul>
+
 
 </body>
 
