@@ -25,10 +25,7 @@ Template.body.events({
     "submit .new-resolution": function(event){
         console.log("submit .new-resolution")
         var title=event.target.title.value;
-        Resolutions.insert({
-            title:title,
-            createAt: new Date(),
-        });
+        Meteor.call("resolution.insert",title);
         event.target.title.value="";
         return false;
     },
@@ -39,18 +36,13 @@ Template.body.events({
 });
 Template.resolution.events({
     "click .toggle-checked":function(){
-        //Update needs (id to update, values in JSON)
-        Resolutions.update(this._id, {
-            //Set values. Another JSON
-            $set:{
-                checked: !this.checked  //You can use this reach any value in the template.
-            }
-        });
+        Meteor.call("resolution.checked",this._id,!this.checked);
     },
     //Action, selector
     "click .delete":function(){
-        Resolutions.remove(this._id);//this means clicked resolution.
+        Meteor.call("resolution.remove",this._id);
     }
+
 });
 Accounts.ui.config({
     passwordSignupFields:"USERNAME_ONLY"
