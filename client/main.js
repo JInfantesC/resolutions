@@ -7,7 +7,9 @@ import './main.html';
 Resolutions.insert({title: 'my-todo'});
 Resolutions.insert({title: 'ololol'});
 */
-
+Template.body.onCreated(function (){
+    Template.instance().subscribe("resolutions");
+});
 Template.body.helpers({
 
     resolutions:function (){
