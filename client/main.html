@@ -33,8 +33,20 @@
     <li class="{{#if checked}}checked{{/if}}">  <!--IF value checked=true do something-->
 
         <label class="text">
+        {{#if isOwner}}
             <input type="checkbox" checked="{{checked}}" class="toggle-checked"/>
+            <!--If this resolution belongs to user. isOwner is defined in main.js-->
+                <button class="toggle-private">
+                    {{#if private}} <!--Private value from mongoDB. Belongs to template. Is update in set private.-->
+                        Private
+                    {{else}}
+                        Public
+                    {{/if}}
+                </button>
+            {{/if}}
             {{title}}</label>
+            {{#if isOwner}}
         <button class="delete">Remove</button>
+        {{/if}}
     </li>
 </template>

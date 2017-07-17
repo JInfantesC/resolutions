@@ -35,6 +35,7 @@ Template.body.events({
         console.log(Session.get("hideFinished"));
         Session.set("hideFinished", event.target.checked)
     }
+
 });
 Template.resolution.events({
     "click .toggle-checked":function(){
@@ -43,8 +44,15 @@ Template.resolution.events({
     //Action, selector
     "click .delete":function(){
         Meteor.call("resolution.remove",this._id);
+    },
+    "click .toggle-private":function(){
+        Meteor.call("setPrivate", this._id, !this.private);//this template id and this private value from mongo
     }
-
+});
+Template.resolution.helpers({
+    isOwner:function(){
+        return Meteor.userId()==this.owner?true:false;
+    }
 });
 Accounts.ui.config({
     passwordSignupFields:"USERNAME_ONLY"
